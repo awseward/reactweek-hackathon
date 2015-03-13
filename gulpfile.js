@@ -32,13 +32,13 @@ gulp.task('livereload', function() {
 });
 
 gulp.task('webpack', function() {
-  return gulp.src('./lib/js/app.js')
+  return gulp.src('./app/App.js')
     .pipe(webpack( require('./webpack.config.js') ))
     .pipe(gulp.dest('public/assets/js'));
 });
 
 gulp.task('styles', function() {
-  return gulp.src(['./lib/css/*.scss'])
+  return gulp.src(['./app/styles/*.scss'])
     .pipe(sass())
     .pipe(autoprefixer({ browsers: ['last 2 version'] }) )
     .pipe(gulp.dest('./public/assets/css/'))
@@ -48,8 +48,8 @@ gulp.task('styles', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('./lib/js/*.js', ['webpack']);
-  gulp.watch('./lib/css/*.scss', ['styles']);
+  gulp.watch('./app/*.js', ['webpack']);
+  gulp.watch('./app/styles/*.scss', ['styles']);
   gulp.watch('./public/*.html', notifyLiveReload);
   gulp.watch('./public/assets/css/*.min.css', notifyLiveReload);
   gulp.watch('./public/assets/js/*.js', notifyLiveReload);
