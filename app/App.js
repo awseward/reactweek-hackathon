@@ -1,8 +1,9 @@
 var React = require('react');
+var TweetList = require('./components/TweetList');
 
 var App = React.createClass({
   render() {
-    return <div>TODO</div>;
+    return <TweetList />;
   }
 });
 

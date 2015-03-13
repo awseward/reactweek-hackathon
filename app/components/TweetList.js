@@ -8,9 +8,32 @@ var TweetList = React.createClass({
     };
   },
 
+  componentDidMount() {
+    var tweets = twitterUtil.getSearchResults().statuses.map((item) => {
+      return {
+        username: item.user.screen_name,
+        text: item.text,
+        geo: {
+          lat: item.geo.coordinates[0],
+          lon: item.geo.coordinates[1]
+        }
+      };
+    });
+
+    this.setState({
+      tweets: tweets
+    });
+  },
+
   render() {
     var tweetComponents = this.state.tweets.map((item) => {
-      return <li>TODO: This will be a tweet</li>
+      return (
+        <li>
+          <p>{item.username}</p>
+          <p>{item.text}</p>
+          <p>{item.geo.lat}, {item.geo.lon}</p>
+        </li>
+        );
     });
     return <ul>{tweetComponents}</ul>;
   }
