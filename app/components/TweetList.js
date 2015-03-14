@@ -13,10 +13,9 @@ var TweetList = React.createClass({
   componentDidMount() {
     var response = twitterUtil.getSearchResults();
     var tweets = response.statuses.map((item) => {
-      var shoutingUsername = wordTransformUtil.upperCase(item.user.screen_name);
 
       return {
-        username: shoutingUsername,
+        username: item.user.screen_name,
         avatar_url: item.user.profile_image_url,
         text: item.text,
         timestamp: item.created_at
@@ -30,11 +29,13 @@ var TweetList = React.createClass({
 
   render() {
     var tweetComponents = this.state.tweets.map((item) => {
-      return <Tweet
-               username={item.username}
-               text={item.text}
-               avatar_url={item.avatar_url}
-               timestamp={item.timestamp} />;
+      return (
+        <Tweet
+          username={item.username}
+          text={item.text}
+          avatar_url={item.avatar_url}
+          timestamp={item.timestamp} />
+      );
     });
     return <ul>{tweetComponents}</ul>;
   }
