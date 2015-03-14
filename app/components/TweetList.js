@@ -1,6 +1,7 @@
 var React = require('react');
 var twitterUtil = require('../utils/twitterUtil');
 var Tweet = require('./Tweet');
+var wordTransformUtil = require('../utils/wordTransformUtil');
 
 var TweetList = React.createClass({
   getInitialState() {
@@ -12,8 +13,10 @@ var TweetList = React.createClass({
   componentDidMount() {
     var response = twitterUtil.getSearchResults();
     var tweets = response.statuses.map((item) => {
+      var shoutingUsername = wordTransformUtil.upperCase(item.user.screen_name);
+
       return {
-        username: item.user.screen_name,
+        username: shoutingUsername,
         avatar_url: item.user.profile_image_url,
         text: item.text,
         timestamp: item.created_at
