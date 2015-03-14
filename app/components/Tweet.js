@@ -1,7 +1,14 @@
 var React = require('react');
+var generalUtil = require('../utils/generalUtil');
+
+var getRandomWord = (sentence) => {
+  var words = sentence.split(' ');
+  return generalUtil.getRandomMember(words);
+}
 
 var Tweet = React.createClass({
   propTypes: {
+    id: React.PropTypes.number.isRequired,
     username: React.PropTypes.string.isRequired,
     avatar_url: React.PropTypes.string.isRequired,
     text: React.PropTypes.string.isRequired,
@@ -11,7 +18,7 @@ var Tweet = React.createClass({
   render() {
     var styles = {
       timestamp: {
-        'font-style': 'italic'
+        fontStyle: 'italic'
       },
 
       avatar: {
