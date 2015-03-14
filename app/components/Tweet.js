@@ -16,7 +16,7 @@ var Tweet = React.createClass({
 
       avatar: {
         height: '40px'
-      }
+      },
     };
 
     return (
