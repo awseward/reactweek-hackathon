@@ -1,9 +1,15 @@
 var React = require('react');
 var TweetList = require('./components/TweetList');
+var LocationSelector = require('./components/LocationSelector');
 
 var App = React.createClass({
   render() {
-    return <TweetList />;
+    return (
+      <div>
+        <TweetList />
+        <LocationSelector />
+      </div>
+    );
   }
 });
 
