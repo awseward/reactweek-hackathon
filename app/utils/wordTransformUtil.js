@@ -34,20 +34,22 @@ var handleRandomWord = (data, callback) => {
   callback && callback(word);
 };
 
+var handleFailure = (method, status, error) => {
+  console.warn(`Error[${method}]`, status, error);
+};
+
 var doBigHugeThesaurus = (word, onSuccess, callback) => {
   var url = `http://words.bighugelabs.com/api/2/${apiKeys.bigHugeThesaurus}/${word}/json`;
 
   $.ajax({
       url: url,
       type: 'GET',
-      dataType: 'jsonp',
-      error: (request, status, error) => {
-        console.error('Error', status, error);
-      },
-      success: (data, status, request) => {
-        onSuccess(data, callback);
-      }
-    });
+      dataType: 'jsonp'
+  }).fail((request, status, error) => {
+    handleFailure('doBigHugeThesaurus', status, error);
+  }).done((data, status, request) => {
+    onSuccess(data, callback);
+  });
 };
 
 var doWikiSynonym = (word, callback) => {
@@ -58,13 +60,11 @@ var doWikiSynonym = (word, callback) => {
     type: 'GET',
     beforeSend: (request, settings) => {
       request.setRequestHeader('X-Mashape-Key', apiKeys.mashape);
-    },
-    error: (request, status, error) => {
-      console.error('Error', status, error);
-    },
-    success: (data, status, request) => {
-      handleWikiSynonym(data, callback);
     }
+  }).fail((request, status, error) => {
+    handleFailure('doWikiSynonym', status, error);
+  }).done((data, status, request) => {
+    handleWikiSynonym(data, callback);
   });
 };
 
@@ -75,12 +75,10 @@ var doRandomWord = (callback) => {
     url: url,
     type: 'GET',
     dataType: 'jsonp',
-    error: (request, status, error) => {
-      console.error('Error', status, error);
-    },
-    success: (data, status, request) => {
-      handleRandomWord(data, callback);
-    }
+  }).fail((request, status, error) => {
+    handleFailure('doRandomWord', status, error);
+  }).done((data, status, request) => {
+    handleRandomWord(data, callback);
   });
 }
 
