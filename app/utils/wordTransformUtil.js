@@ -1,28 +1,20 @@
 var $ = require('jquery');
+var generalUtil = require('./generalUtil');
 var bigHugeThesaurusApiKey = 'be9a99053a1edb73d99f541e941f5b6c';
 
 var getRandomInt = (max) => {
   return Math.floor(Math.random() * max);
 }
 
-var getRandomProperty = (obj) => {
-  var keys = Object.keys(obj);
-  if (keys.length != 0) {
-    var index = getRandomInt(keys.length - 1);
-    var key = keys[index];
-    return obj[key];
-  }
-};
-
 var handleSynonym = (data, callback) => {
-  var partOfSpeech = getRandomProperty(data);
+  var partOfSpeech = generalUtil.getRandomProperty(data);
   var synonyms = partOfSpeech.syn;
   var result = (synonyms && synonyms[0]) || 'N/A';
   callback && callback(result);
 }
 
 var handleAntonym = (data, callback) => {
-  var partOfSpeech = getRandomProperty(data);
+  var partOfSpeech = generalUtil.getRandomProperty(data);
   var antonyms = partOfSpeech.ant;
   var result = (antonyms && antonyms[0]) || 'N/A';
   callback && callback(result);

@@ -1,6 +1,7 @@
 var React = require('react');
 var TweetList = require('./components/TweetList');
 var wordTransformUtil = require('./utils/wordTransformUtil');
+var generalUtil = require('./utils/generalUtil');
 
 var printResult = (original, transformed) => {
   alert(`{original: "${original}", transformed: "${transformed}"}`);
@@ -8,14 +9,14 @@ var printResult = (original, transformed) => {
 
 var App = React.createClass({
   componentDidMount() {
-    var derp = 'gross';
-    wordTransformUtil.synonym(derp, (word) => {
-      printResult(derp, word);
-    });
+    // var original = 'love';
+    // wordTransformUtil.synonym(original, (transformed) => {
+    //   printResult(original, transformed);
+    // });
 
-    wordTransformUtil.antonym(derp, (word) => {
-      printResult(derp, word);
-    });
+    // wordTransformUtil.antonym(original, (transformed) => {
+    //   printResult(original, transformed);
+    // });
   },
 
   render() {
