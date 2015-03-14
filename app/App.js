@@ -29,7 +29,8 @@ var demoTransformers = () => {
 
 var App = React.createClass({
   componentDidMount() {
-    demoTransformers();
+    // Uncomment for a little derpy demo of the word transformations...
+    // demoTransformers();
   },
 
   render() {
