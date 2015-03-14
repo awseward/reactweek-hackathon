@@ -42,9 +42,9 @@ var doBigHugeThesaurus = (word, onSuccess, callback) => {
   var url = `http://words.bighugelabs.com/api/2/${apiKeys.bigHugeThesaurus}/${word}/json`;
 
   $.ajax({
-      url: url,
-      type: 'GET',
-      dataType: 'jsonp'
+    url: url,
+    type: 'GET',
+    dataType: 'jsonp'
   }).fail((request, status, error) => {
     handleFailure('doBigHugeThesaurus', status, error);
   }).done((data, status, request) => {
