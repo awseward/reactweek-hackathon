@@ -1,20 +1,22 @@
 {
   "name": "reactweek-hackathon",
   "version": "1.0.0",
-  "description": "",
+  "description": "A twitter, synonym swapping, location app!",
+  "repository": "git@github.com:awseward/reactweek-hackathon.git",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --inline --content-base ."
   },
-  "author": "Me",
+  "author": "Andrew Seward, Michael Hinrichs",
   "license": "ISC",
   "dependencies": {
-    "react": "0.12.2",
-    "uuid": "",
+    "node-geocoder": "^2.16.1",
     "q": "^1.2.0",
+    "react": "0.12.2",
     "reflux": "^0.2.6",
-    "underscore": "1.8.2"
+    "underscore": "1.8.2",
+    "uuid": ""
   },
   "devDependencies": {
     "express": "^4.12.0",

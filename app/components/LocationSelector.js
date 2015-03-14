@@ -1,4 +1,7 @@
 var React = require('react');
+var geocoderProvider = 'openstreetmap';
+var httpAdapter = 'http'; 
+var geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter);
 
 var LocationSelector = React.createClass({
 
