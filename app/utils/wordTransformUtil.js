@@ -64,6 +64,8 @@ var doWikiSynonym = (word, callback) => {
   }).fail((request, status, error) => {
     handleFailure('doWikiSynonym', status, error);
   }).done((data, status, request) => {
+    if (request.status === 204) { return; }
+
     handleWikiSynonym(data, callback);
   });
 };

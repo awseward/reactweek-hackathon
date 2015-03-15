@@ -17,7 +17,7 @@ var TweetList = React.createClass({
       if (tweets.length == 0) { return; }
 
       var tweet = generalUtil.getRandomMember(this.state.tweets);
-      console.log(`Do something with ${tweet.username}'s tweet`);
+      console.log(tweet.username, JSON.stringify(tweet));
     }, 1000);
   },
 
