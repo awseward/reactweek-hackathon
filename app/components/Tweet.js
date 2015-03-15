@@ -1,6 +1,8 @@
 var React = require('react');
+var $ = require('jquery');
 var generalUtil = require('../utils/generalUtil');
 var badlyNamedUtil = require('../utils/badlyNamedUtil');
+var wordTransformUtil = require('../utils/wordTransformUtil');
 
 var getRandomWord = (sentence) => {
   var words = sentence.split(' ');
@@ -27,20 +29,31 @@ var Tweet = React.createClass({
   },
 
   componentWillUnmount() {
-    badlyNameUtil.unregister(this);
+    badlyNamedUtil.unregister(this);
+  },
+
+  componentDidUpdate() {
+    var container = this.refs.container.getDOMNode();
+    $(container).addClass('updated');
+    setTimeout(() => {
+      $(container).removeClass('updated');
+    }, 300);
   },
 
   swapRandomWord() {
     var sentence = this.state.text;
-    var word = getRandomWord(sentence);
+    var word = getRandomWord(sentence).replace(/^[^\w]|_/g, '').replace(/[^\w]|_$/g, '');
+
+    if (word.replace(/\s/g, '') === '') { return; }
+
     var index = sentence.indexOf(word);
-    // var sanitized = word.replace(/[^\w]|_/g, '');
+    var head = sentence.substring(0, index);
+    var tail = sentence.substring(index + word.length);
 
-    var newWord = 'SHIT';
-    var newSentence = sentence.substring(0, index) + newWord + sentence.substring(index + word.length);
-
-    this.setState({
-      text: newSentence
+    wordTransformUtil.random((word) => {
+      this.setState({
+        text: head + word + tail
+      });
     });
   },
 
@@ -52,23 +65,36 @@ var Tweet = React.createClass({
 
   render() {
     var styles = {
+      container: {
+        margin: '10px',
+        padding: '10px',
+        display: 'inline-block',
+        width: '22%',
+        verticalAlign: 'top'
+      },
+
       timestamp: {
         fontStyle: 'italic'
       },
 
       avatar: {
-        height: '40px'
+        height: '40px',
+        marginRight: '20px'
       },
+
+      username: {
+        verticalAlign: 'top'
+      }
     };
 
     return (
-      <li>
+      <div ref='container' style={styles.container}>
         <img style={styles.avatar} src={this.props.avatar_url}></img>
-        <p>{this.props.username}</p>
+        <span style={styles.username}>{this.props.username}</span>
         <p>{this.state.text}</p>
         <p style={styles.timestamp}>{this.props.timestamp}</p>
         <button onClick={this.resetText}>Reset</button>
-      </li>
+      </div>
     );
   }
 });

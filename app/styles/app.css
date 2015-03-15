@@ -2,10 +2,15 @@
 html {
   box-sizing: border-box;
 }
+
 *, *:before, *:after {
   box-sizing: inherit;
 }
 
 body {
   font-family: sans-serif;
+}
+
+.updated {
+  background-color: rgb(200, 232, 232);
 }

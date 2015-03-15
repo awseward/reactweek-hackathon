@@ -40,7 +40,7 @@ var TweetList = React.createClass({
           timestamp={item.timestamp} />
       );
     });
-    return <ul>{tweetComponents}</ul>;
+    return <div>{tweetComponents}</div>;
   }
 });
 
