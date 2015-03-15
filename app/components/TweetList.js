@@ -11,7 +11,7 @@ var TweetList = React.createClass({
     };
   },
 
-  componentDidMount() {
+  componentWillMount() {
     var response = twitterUtil.getSearchResults();
     var tweets = response.statuses.map((item) => {
       return {

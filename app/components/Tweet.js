@@ -34,13 +34,19 @@ var Tweet = React.createClass({
     var sentence = this.state.text;
     var word = getRandomWord(sentence);
     var index = sentence.indexOf(word);
-    var sanitized = word.replace(/[^\w]|_/g, '');
+    // var sanitized = word.replace(/[^\w]|_/g, '');
 
     var newWord = 'SHIT';
     var newSentence = sentence.substring(0, index) + newWord + sentence.substring(index + word.length);
 
     this.setState({
       text: newSentence
+    });
+  },
+
+  resetText() {
+    this.setState({
+      text: this.props.text
     });
   },
 
@@ -61,6 +67,7 @@ var Tweet = React.createClass({
         <p>{this.props.username}</p>
         <p>{this.state.text}</p>
         <p style={styles.timestamp}>{this.props.timestamp}</p>
+        <button onClick={this.resetText}>Reset</button>
       </li>
     );
   }
