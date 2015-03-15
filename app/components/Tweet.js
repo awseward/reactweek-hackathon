@@ -1,5 +1,6 @@
 var React = require('react');
 var generalUtil = require('../utils/generalUtil');
+var badlyNamedUtil = require('../utils/badlyNamedUtil');
 
 var getRandomWord = (sentence) => {
   var words = sentence.split(' ');
@@ -13,6 +14,20 @@ var Tweet = React.createClass({
     avatar_url: React.PropTypes.string.isRequired,
     text: React.PropTypes.string.isRequired,
     timestamp: React.PropTypes.string.isRequired
+  },
+
+  componentWillMount() {
+    badlyNamedUtil.register(this);
+  },
+
+  componentWillUnmount() {
+    badlyNameUtil.unregister(this);
+  },
+
+  doSomething() {
+    var word = getRandomWord(this.props.text);
+    var sanitized = word.replace(/[^\w]|_/g, '');
+    console.log(sanitized);
   },
 
   render() {

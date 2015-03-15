@@ -11,20 +11,6 @@ var TweetList = React.createClass({
     };
   },
 
-  componentWillMount() {
-    this.swapInterval = setInterval(() => {
-      var tweets = this.state.tweets;
-      if (tweets.length == 0) { return; }
-
-      var tweet = generalUtil.getRandomMember(this.state.tweets);
-      console.log(tweet.username, JSON.stringify(tweet));
-    }, 1000);
-  },
-
-  componentWillUnmount() {
-    this.swapInterval = null;
-  },
-
   componentDidMount() {
     var response = twitterUtil.getSearchResults();
     var tweets = response.statuses.map((item) => {
