@@ -16,6 +16,12 @@ var Tweet = React.createClass({
     timestamp: React.PropTypes.string.isRequired
   },
 
+  getInitialState() {
+    return {
+      text: this.props.text
+    };
+  },
+
   componentWillMount() {
     badlyNamedUtil.register(this);
   },
@@ -24,10 +30,18 @@ var Tweet = React.createClass({
     badlyNameUtil.unregister(this);
   },
 
-  doSomething() {
-    var word = getRandomWord(this.props.text);
+  swapRandomWord() {
+    var sentence = this.state.text;
+    var word = getRandomWord(sentence);
+    var index = sentence.indexOf(word);
     var sanitized = word.replace(/[^\w]|_/g, '');
-    console.log(sanitized);
+
+    var newWord = 'SHIT';
+    var newSentence = sentence.substring(0, index) + newWord + sentence.substring(index + word.length);
+
+    this.setState({
+      text: newSentence
+    });
   },
 
   render() {
@@ -45,7 +59,7 @@ var Tweet = React.createClass({
       <li>
         <img style={styles.avatar} src={this.props.avatar_url}></img>
         <p>{this.props.username}</p>
-        <p>{this.props.text}</p>
+        <p>{this.state.text}</p>
         <p style={styles.timestamp}>{this.props.timestamp}</p>
       </li>
     );

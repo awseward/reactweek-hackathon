@@ -4,7 +4,7 @@ var tweets = [];
 var interval = setInterval(() => {
   if (tweets.length == 0) { return; }
   var tweet = generalUtil.getRandomMember(tweets);
-  tweet.doSomething();
+  tweet.swapRandomWord();
 }, 1000);
 
 var badlyNamedUtil = {
