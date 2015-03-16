@@ -45,7 +45,7 @@ var Tweet = React.createClass({
   swapRandomWord() {
     var sentence = this.state.text;
     var randomWord = getRandomWord(sentence);
-    var cleanedWord = randomWord.replace(/^([^\w]|_)/g, '').replace(/([^\w]|_)$/g, '');
+    var cleanedWord = randomWord.replace(/^([^\w]|_)+/g, '').replace(/([^\w]|_)+$/g, '');
 
     var index, tail;
     if (cleanedWord.replace(/\s/g, '') === '') {
