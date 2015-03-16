@@ -79,25 +79,32 @@ var Tweet = React.createClass({
       },
 
       timestamp: {
-        fontStyle: 'italic'
+        fontStyle: 'italic',
       },
 
       avatar: {
         height: '40px',
-        marginRight: '20px'
+        marginRight: '10px',
+        verticalAlign: 'middle'
       },
 
       username: {
-        verticalAlign: 'top'
+        verticalAlign: 'top',
+        textDecoration: 'none',
+        color: 'rgb(0, 132, 180)'
       }
     };
+
+    var userLink = `https://twitter.com/${this.props.username}`;
+    var date = new Date(Date.parse(this.props.timestamp));
+    var timestamp = `${date.toLocaleDateString()} at ${date.toLocaleTimeString()}`
 
     return (
       <div className='tweet' ref='container' style={styles.container}>
         <img style={styles.avatar} src={this.props.avatar_url}></img>
-        <span style={styles.username}>{this.props.username}</span>
+        <a href={userLink} style={styles.username}>@{this.props.username}</a>
         <p>{this.state.text}</p>
-        <p style={styles.timestamp}>{this.props.timestamp}</p>
+        <p style={styles.timestamp}>{timestamp}</p>
         <button onClick={this.reset}>Reset</button>
       </div>
     );
