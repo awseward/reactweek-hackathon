@@ -22,7 +22,7 @@ var Tweet = React.createClass({
 
   getInitialState() {
     return {
-      text: this.props.text
+      text: generalUtil.normalizeWhitespace(this.props.text)
     };
   },
 
@@ -64,10 +64,8 @@ var Tweet = React.createClass({
     });
   },
 
-  resetText() {
-    this.setState({
-      text: this.props.text
-    });
+  reset() {
+    this.setState(this.getInitialState());
   },
 
   render() {
@@ -95,12 +93,12 @@ var Tweet = React.createClass({
     };
 
     return (
-      <div ref='container' style={styles.container}>
+      <div className='tweet' ref='container' style={styles.container}>
         <img style={styles.avatar} src={this.props.avatar_url}></img>
         <span style={styles.username}>{this.props.username}</span>
         <p>{this.state.text}</p>
         <p style={styles.timestamp}>{this.props.timestamp}</p>
-        <button onClick={this.resetText}>Reset</button>
+        <button onClick={this.reset}>Reset</button>
       </div>
     );
   }

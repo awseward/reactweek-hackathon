@@ -9,6 +9,12 @@ html {
 
 body {
   font-family: sans-serif;
+  background-color: rgb(142, 193, 218);
+}
+
+.tweet:not(.updated) {
+  background-color: rgb(245, 245, 245);
+  transition: background-color 1s;
 }
 
 .updated {
