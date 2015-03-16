@@ -46,11 +46,12 @@ var Tweet = React.createClass({
 
     if (word.replace(/\s/g, '') === '') { return; }
 
+    // FIXME: This does weird things when punctuation is on the end of words
     var index = sentence.indexOf(word);
     var head = sentence.substring(0, index);
     var tail = sentence.substring(index + word.length);
 
-    wordTransformUtil.random((word) => {
+    wordTransformUtil.betterRandom((word) => {
       this.setState({
         text: head + word + tail
       });
