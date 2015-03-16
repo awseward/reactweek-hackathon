@@ -5,7 +5,7 @@ var badlyNamedUtil = require('../utils/badlyNamedUtil');
 var wordTransformUtil = require('../utils/wordTransformUtil');
 
 var getRandomWord = (sentence) => {
-  var words = sentence.split(' ').filter((item) => {
+  var words = sentence.split(/\s/).filter((item) => {
     return item !== '';
   });
   return generalUtil.getRandomMember(words);
@@ -48,7 +48,7 @@ var Tweet = React.createClass({
     var cleanedWord = randomWord.replace(/^([^\w]|_)+/g, '').replace(/([^\w]|_)+$/g, '');
 
     var index, tail;
-    if (cleanedWord.replace(/\s/g, '') === '') {
+    if (cleanedWord.replace(/\s+/g, '') === '') {
       index = sentence.indexOf(randomWord);
       tail = sentence.substring(index + randomWord.length);
     } else {
