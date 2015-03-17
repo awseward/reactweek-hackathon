@@ -1,0 +1,17 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+body {
+  font-family: sans-serif;
+  background-color: #8ec1da; }
+
+.tweet:not(.updated) {
+  background-color: whitesmoke;
+  transition: background-color 1s; }
+
+.updated {
+  background-color: #c8e8e8; }
