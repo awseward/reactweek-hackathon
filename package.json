@@ -17,17 +17,17 @@
     "underscore": "1.8.2"
   },
   "devDependencies": {
+    "connect-livereload": "",
     "express": "^4.12.0",
     "gulp": "^3.8.11",
-    "gulp-sourcemaps": "^1.5.0",
+    "gulp-autoprefixer": "",
     "gulp-minify-css": "",
     "gulp-rename": "",
-    "gulp-webpack": "",
     "gulp-sass": "",
-    "tiny-lr": "",
+    "gulp-sourcemaps": "^1.5.0",
+    "gulp-webpack": "",
     "jsx-loader": "^0.12.2",
-    "connect-livereload": "",
-    "gulp-autoprefixer": "",
+    "tiny-lr": "",
     "webpack": "^1.7.3"
   },
   "jshintConfig": {
