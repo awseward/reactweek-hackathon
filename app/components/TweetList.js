@@ -13,7 +13,9 @@ var TweetList = React.createClass({
 
   componentWillMount() {
     var response = twitterUtil.getSearchResults();
-    var tweets = response.statuses.map((item) => {
+    var tweets = response.statuses.slice(0, 12).map((item) => {
+    // Only loading 12 tweets for now...
+    // var tweets = response.statuses.map((item) => {
       return {
         id: item.id,
         username: item.user.screen_name,
