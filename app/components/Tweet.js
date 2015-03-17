@@ -4,12 +4,19 @@ var generalUtil = require('../utils/generalUtil');
 var badlyNamedUtil = require('../utils/badlyNamedUtil');
 var wordTransformUtil = require('../utils/wordTransformUtil');
 
-var getRandomWord = (sentence) => {
-  var words = sentence.split(/\s/).filter((item) => {
-    return item !== '';
-  });
-  return generalUtil.getRandomMember(words);
-}
+var renameThisPlease = (oldWord, newWord) => {
+  if (oldWord.replace(/([^\w|_])/g, '') === '') {
+    return newWord;
+  }
+
+  var headMatches = oldWord.match(/^([^\w]|_)+/);
+  var head = headMatches && headMatches[0] || '';
+
+  var tailMatches = oldWord.match(/([^\w]|_)+$/);
+  var tail = tailMatches && tailMatches[0] || '';
+
+  return head + newWord + tail;
+};
 
 var Tweet = React.createClass({
   propTypes: {
@@ -22,7 +29,7 @@ var Tweet = React.createClass({
 
   getInitialState() {
     return {
-      text: generalUtil.normalizeWhitespace(this.props.text)
+      words: this.props.text.split(/\s/),
     };
   },
 
@@ -43,23 +50,22 @@ var Tweet = React.createClass({
   },
 
   swapRandomWord() {
-    var sentence = this.state.text;
-    var randomWord = getRandomWord(sentence);
-    var cleanedWord = randomWord.replace(/^([^\w]|_)+/g, '').replace(/([^\w]|_)+$/g, '');
-
-    var index, tail;
-    if (cleanedWord.replace(/\s+/g, '') === '') {
-      index = sentence.indexOf(randomWord);
-      tail = sentence.substring(index + randomWord.length);
-    } else {
-      index = sentence.indexOf(cleanedWord);
-      tail = sentence.substring(index + cleanedWord.length);
-    }
-    var head = sentence.substring(0, index);
+    var words = this.state.words.slice();
+    var randomPosition = Math.floor(Math.random() * words.length);
+    var originalWord = words[randomPosition];
 
     wordTransformUtil.betterRandom((word) => {
+      var newWord = renameThisPlease(originalWord, word);
+      words[randomPosition] = newWord;
+
       this.setState({
-        text: head + word + tail
+        // If we don't join and split, there is a potential for an index in
+        // words to have to words in it due to the API occasionally returning
+        // 'phrases'. (e.g. `['this', 'shit', 'is bananas']`)
+        //
+        // The joining and splitting done here makes sure that the above
+        // example ends up as `['this', 'shit', 'is', 'bananas']` instead.
+        words: words.join(' ').split(/\s/)
       });
     });
   },
@@ -103,7 +109,7 @@ var Tweet = React.createClass({
       <div className='tweet' ref='container' style={styles.container}>
         <img style={styles.avatar} src={this.props.avatar_url}></img>
         <a href={userLink} style={styles.username}>@{this.props.username}</a>
-        <p>{this.state.text}</p>
+        <p>{this.state.words.join(' ')}</p>
         <p style={styles.timestamp}>{timestamp}</p>
         <button onClick={this.reset}>Reset</button>
       </div>
