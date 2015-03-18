@@ -17,6 +17,12 @@ var generalUtil = {
 
     var key = this.getRandomMember(keys);
     return obj[key];
+  },
+
+  normalizeWhitespace: (sentence) => {
+    return sentence.trim().split(/\s/).filter((item) => {
+      return item.trim() !== '';
+    }).join(' ');
   }
 };
 

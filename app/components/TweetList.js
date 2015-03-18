@@ -12,22 +12,10 @@ var TweetList = React.createClass({
   },
 
   componentWillMount() {
-    this.swapInterval = setInterval(() => {
-      var tweets = this.state.tweets;
-      if (tweets.length == 0) { return; }
-
-      var tweet = generalUtil.getRandomMember(this.state.tweets);
-      console.log(`Do something with ${tweet.username}'s tweet`);
-    }, 1000);
-  },
-
-  componentWillUnmount() {
-    this.swapInterval = null;
-  },
-
-  componentDidMount() {
     var response = twitterUtil.getSearchResults();
-    var tweets = response.statuses.map((item) => {
+    var tweets = response.statuses.slice(0, 12).map((item) => {
+    // Only loading 12 tweets for now...
+    // var tweets = response.statuses.map((item) => {
       return {
         id: item.id,
         username: item.user.screen_name,
@@ -54,7 +42,7 @@ var TweetList = React.createClass({
           timestamp={item.timestamp} />
       );
     });
-    return <ul>{tweetComponents}</ul>;
+    return <div>{tweetComponents}</div>;
   }
 });
 
