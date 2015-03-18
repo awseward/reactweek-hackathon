@@ -1,10 +1,14 @@
 var generalUtil = {
+  getRandomInt: (max) => {
+    return Math.floor(Math.random() * max);
+  },
+
   getRandomMember: (array) => {
     if (array.length === 0) {
       return null;
     }
 
-    var index = Math.floor(Math.random() * array.length);
+    var index = getRandomInt(array.length);
     return array[index];
   },
 
