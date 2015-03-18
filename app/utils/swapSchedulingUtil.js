@@ -7,7 +7,7 @@ var interval = setInterval(() => {
   tweet.swapRandomWord();
 }, 1000);
 
-var badlyNamedUtil = {
+var swapSchedulingUtil = {
   register: (tweet) => {
     tweets.push(tweet)
   },
@@ -19,4 +19,4 @@ var badlyNamedUtil = {
   }
 };
 
-module.exports = badlyNamedUtil;
+module.exports = swapSchedulingUtil;

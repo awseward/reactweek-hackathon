@@ -1,7 +1,7 @@
 var React = require('react');
 var $ = require('jquery');
 var generalUtil = require('../utils/generalUtil');
-var badlyNamedUtil = require('../utils/badlyNamedUtil');
+var swapSchedulingUtil = require('../utils/swapSchedulingUtil');
 var wordTransformUtil = require('../utils/wordTransformUtil');
 
 var cleanUpWord = (oldWord, newWord) => {
@@ -34,7 +34,7 @@ var Tweet = React.createClass({
   },
 
   componentWillMount() {
-    badlyNamedUtil.register(this);
+    swapSchedulingUtil.register(this);
   },
 
   componentWillUnmount() {
