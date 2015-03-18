@@ -4,7 +4,7 @@ var generalUtil = require('../utils/generalUtil');
 var badlyNamedUtil = require('../utils/badlyNamedUtil');
 var wordTransformUtil = require('../utils/wordTransformUtil');
 
-var renameThisPlease = (oldWord, newWord) => {
+var cleanUpWord = (oldWord, newWord) => {
   if (oldWord.replace(/([^\w|_])/g, '') === '') {
     return newWord;
   }
@@ -55,7 +55,7 @@ var Tweet = React.createClass({
     var originalWord = words[randomPosition];
 
     wordTransformUtil.betterRandom((word) => {
-      var newWord = renameThisPlease(originalWord, word);
+      var newWord = cleanUpWord(originalWord, word);
       words[randomPosition] = newWord;
 
       this.setState({
