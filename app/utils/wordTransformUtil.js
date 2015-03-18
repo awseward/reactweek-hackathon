@@ -6,10 +6,6 @@ var apiKeys = {
   wordnik: 'a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5' // <= This is just stolen from the example page, we'll probably want to set our own up...
 };
 
-var getRandomInt = (max) => {
-  return Math.floor(Math.random() * max);
-};
-
 var handleSynonym = (data, callback) => {
   var partOfSpeech = generalUtil.getRandomProperty(data);
   var synonyms = partOfSpeech.syn;

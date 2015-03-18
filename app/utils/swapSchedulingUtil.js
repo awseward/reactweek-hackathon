@@ -11,6 +11,7 @@ var swapSchedulingUtil = {
   register: (tweet) => {
     tweets.push(tweet)
   },
+
   unregister: (tweet) => {
     var index = tweets.indexOf(tweet);
     if (index != -1) {
